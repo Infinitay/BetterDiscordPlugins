@@ -21,16 +21,16 @@ const config = {
         ],
     github_raw:
       "https://raw.githubusercontent.com/QWERTxD/BetterDiscordPlugins/main/InAppNotifications/InAppNotifications.plugin.js",
-    version: "1.1.5",
+    version: "1.1.6",
     description:
       "Displays notifications such as new messages, friends added in Discord.",
 	},
   changelog: [
     {
-      "title": "Discriminators",
-      "type": "added",
+      "title": "Fixed",
+      "type": "fixed",
       "items": [
-        "Modified how usernames and display names are displayed in notifications.",
+        "Resolves the plugin not working due to a changed module for raw messages",
       ]
     }
   ],
@@ -208,7 +208,7 @@ const config = {
 
       const ChannelTypes = Webpack.getModule(Webpack.Filters.byProps("GUILD_TEXT"), { searchExports: true });
       const MuteStore = WebpackModules.getByProps("isSuppressEveryoneEnabled");
-      const isMentioned = Webpack.getModule(x=>x.isRawMessageMentioned)
+      const isMentioned = Webpack.getModule(Webpack.Filters.byStrings("userId", "channelId", "mentionEveryone", "mentionUsers", "mentionRoles", "suppressEveryone", "suppressRoles"), { searchExports: true });
       const Markdown = WebpackModules.getByProps("parse", "parseTopic");
       const GuildStore = Webpack.getStore("GuildStore")
       const AckUtils = { ack: Webpack.getModule(Webpack.Filters.byStrings("CHANNEL_ACK"), { searchExports: true }) };
